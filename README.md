@@ -1,43 +1,142 @@
-# Testes automatizados – Biblioteca Luiz Brasil
+# 📚 Biblioteca – Testes Automatizados
 
-Suíte E2E em **Python + pytest + Playwright**, escrita a partir do front React (Vite) enviado.
+Repositório destinado ao desenvolvimento e à execução de testes automatizados da aplicação **Biblioteca**, utilizando Python, Pytest e Playwright.
 
-## Pré-requisitos
-- Python 3.10+ e Node 18+
-- Projeto React em `../biblioteca-react` (ou defina `APP_DIR`)
+O projeto tem como objetivo validar as principais funcionalidades do sistema, garantindo maior confiabilidade, qualidade e estabilidade da aplicação.
 
-## Instalação
-```bash
-pip install -r requirements.txt
-playwright install chromium
+## 🎯 Objetivo
+
+Automatizar cenários de teste funcionais para verificar o comportamento da aplicação, incluindo cadastro de livros, empréstimos, devoluções, pesquisas, navegação e persistência de dados.
+
+## 🛠️ Tecnologias utilizadas
+
+- **Python 3** – Linguagem utilizada na implementação dos testes.
+- **Pytest** – Framework para execução e organização dos testes.
+- **Playwright** – Automação de navegadores e interações com a aplicação.
+- **Chromium** – Navegador utilizado na execução dos testes.
+
+## 📂 Estrutura do projeto
+
+```text
+biblioteca-testes/
+│
+├── pages/
+│   └── Componentes e páginas utilizadas nos testes
+│
+├── tests/
+│   ├── test_cadastro_livro.py
+│   ├── test_emprestimo.py
+│   ├── test_emprestimos_devolucao.py
+│   ├── test_livros_listagem_busca.py
+│   ├── test_navegacao.py
+│   └── test_persistencia_config.py
+│
+├── conftest.py
+├── pytest.ini
+├── requirements.txt
+└── README.md
 ```
 
-## Execução
-```bash
-pytest                       # sobe o `npm run dev` sozinho (porta 5173)
-pytest -m smoke              # só os fluxos essenciais
-pytest --headed --slowmo 300 # vendo o navegador
-pytest -n 4                  # em paralelo (pip install pytest-xdist)
-pytest --browser firefox     # outros navegadores
+## ⚙️ Pré-requisitos
 
-# usando um servidor já rodando
-BASE_URL=http://localhost:5173 pytest
-# projeto React em outro caminho
-APP_DIR=/caminho/biblioteca-react pytest
+Antes de executar os testes, é necessário ter instalado:
+
+- Python 3
+- Node.js e npm
+- Git
+
+A aplicação Biblioteca deve estar disponível localmente para que os testes possam ser executados.
+
+## 🚀 Instalação
+
+**1. Clone o repositório:**
+
+```bash
+git clone URL_DO_REPOSITORIO
 ```
 
-## Organização
-| Arquivo | Cobre |
+**2. Acesse a pasta:**
+
+```bash
+cd biblioteca-testes
+```
+
+**3. Crie um ambiente virtual:**
+
+```bash
+python -m venv .venv
+```
+
+**4. Ative o ambiente virtual:**
+
+Windows PowerShell:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+**5. Instale as dependências:**
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+**6. Instale o navegador do Playwright:**
+
+```bash
+python -m playwright install chromium
+```
+
+## ▶️ Executando os testes
+
+Primeiro, inicie a aplicação Biblioteca em outro terminal.
+
+Em seguida, configure a URL da aplicação:
+
+```powershell
+$env:BASE_URL="http://localhost:5174"
+```
+
+Execute a suíte completa:
+
+```bash
+python -m pytest -v
+```
+
+Para executar um arquivo específico:
+
+```bash
+python -m pytest tests/test_cadastro_livro.py -v
+```
+
+## 📊 Resultado da execução
+
+Na execução de validação realizada durante o desenvolvimento, foram obtidos os seguintes resultados:
+
+- **110 testes executados**
+- **110 testes aprovados**
+- **0 falhas**
+- **Tempo de execução:** aproximadamente 102 segundos.
+
+## 🧪 Cenários contemplados
+
+| Módulo | Cenários testados |
 |---|---|
-| `tests/test_navegacao.py` | rotas por hash, menu, reset de busca/aba |
-| `tests/test_livros_listagem_busca.py` | cards, disponibilidade, abas, busca (sem acento/caixa), detalhe |
-| `tests/test_cadastro_livro.py` | **RF1** cadastro: sucesso, obrigatórios, ano, exemplares, ISBN único |
-| `tests/test_emprestimo.py` | **RF3** empréstimo: CPF, prazo de 14 dias, limite de 2, sem exemplar, indisponível |
-| `tests/test_emprestimos_devolucao.py` | lista/abas/busca de empréstimos, detalhe, **RF4** devolução |
-| `tests/test_persistencia_config.py` | localStorage e "Restaurar dados iniciais" (`#config`) |
-| `pages/biblioteca_page.py` | Page Object (seletores e ações reutilizáveis) |
+| Cadastro de livros | Validações, campos obrigatórios, ISBN e persistência |
+| Empréstimos | Cadastro, CPF, disponibilidade e limites |
+| Devoluções | Listagem, status, devolução e liberação de exemplares |
+| Listagem e busca | Exibição, filtros, pesquisas e detalhes |
+| Navegação | Rotas, menus e navegação entre telas |
+| Persistência e configuração | LocalStorage, recarregamento e restauração de dados |
 
-## Observações
-- Cada teste roda num contexto novo do navegador, então o `localStorage` começa vazio e a app carrega o **seed** (6 livros, 6 leitores, 4 empréstimos). Os testes dependem desses dados.
-- Datas (hoje, +14 dias) são formatadas no próprio navegador com a mesma função da aplicação, evitando divergência de fuso/idioma.
-- A tela de Configurações não tem item no menu; é acessada via `#config`.
+## 📌 Observações
+
+- Os testes utilizam automação de navegador para interagir com a aplicação.
+- A aplicação precisa estar em execução antes de iniciar a suíte.
+- A variável `BASE_URL` permite configurar o endereço utilizado pelos testes.
+- O ambiente virtual `.venv` não deve ser enviado ao GitHub.
+
+---
+
+**Projeto:** Biblioteca – Testes Automatizados  
+**Finalidade:** Qualidade de software e automação de testes funcionais.
