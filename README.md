@@ -136,7 +136,4 @@ Na execução de validação realizada durante o desenvolvimento, foram obtidos 
 - A variável `BASE_URL` permite configurar o endereço utilizado pelos testes.
 - O ambiente virtual `.venv` não deve ser enviado ao GitHub.
 
----
 
-**Projeto:** Biblioteca – Testes Automatizados  
-**Finalidade:** Qualidade de software e automação de testes funcionais.
